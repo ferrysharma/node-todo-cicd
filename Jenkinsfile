@@ -1,6 +1,11 @@
 pipeline {
     agent any
-    
+
+    environment{
+
+        SONAR_HOME = tool "Sonar"
+    }
+
     stages {
         
         stage("code"){
@@ -28,6 +33,13 @@ pipeline {
                 sh "docker push ${env.dockerHubUser}/node-app-test-new:latest"
                 echo "image push ho gaya"
                 }
+            }
+        }
+        stage("SonarQube Analysis"){
+            steps{
+              withSonarQubeEnv("Sonar"){
+                sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=notetodo -Dsonar.projectKey=note-to-app"
+              }
             }
         }
         stage("deploy"){
