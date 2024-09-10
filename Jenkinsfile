@@ -3,7 +3,7 @@ pipeline {
 
     environment{
 
-        SONAR_HOME = tool "Sonar"
+        SONAR_HOME = tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
     stages {
