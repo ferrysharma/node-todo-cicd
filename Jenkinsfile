@@ -37,7 +37,7 @@ pipeline {
         }
         stage("SonarQube Analysis"){
             steps{
-              withSonarQubeEnv("Sonar"){
+              withSonarQubeEnv("SonarServer"){
                 sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=notetodo -Dsonar.projectKey=note-to-app"
               }
             }
