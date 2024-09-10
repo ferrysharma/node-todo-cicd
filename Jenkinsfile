@@ -1,11 +1,10 @@
 pipeline {
-    agent any
 
+    agent any
     environment{
 
         SONAR_HOME = tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
-
     stages {
         
         stage("code"){
@@ -22,6 +21,7 @@ pipeline {
         }
         stage("scan image"){
             steps{
+                sh "trivy image node-app-test-new"
                 echo "image scanning ho gayi"
             }
         }
