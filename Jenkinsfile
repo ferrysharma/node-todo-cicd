@@ -37,8 +37,15 @@ pipeline {
         }
         stage("SonarQube Analysis"){
             steps{
-              withSonarQubeEnv("SonarServer"){
+              withSonarQubeEnv("Sonar"){
                 sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=notetodo -Dsonar.projectKey=note-to-app"
+              }
+            }
+        }
+        stage("SonarQube Quality Gates"){
+            steps{
+              timeout(time: 1, unit: "MINUTES"){
+                   waitForQualityGate abortPipeline: false 
               }
             }
         }
