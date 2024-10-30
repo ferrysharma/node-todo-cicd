@@ -2,7 +2,7 @@ FROM node:12.2.0-alpine
 
 WORKDIR /app
 
-COPY /home/ubuntu/ /app
+COPY . /app
 
 RUN npm install
 RUN npm run test
